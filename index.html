@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sugoi Shimeji – Chrome Extension</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css"><!-- optional -->
+  <style>
+    /* tiny in-page styles to keep the file self-contained */
+    body{font-family:system-ui,Arial,sans-serif;margin:0;color:#222;line-height:1.5}
+    header,main,footer{max-width:760px;margin:auto;padding:1.5rem}
+    header{text-align:center}
+    h1{margin:0.5rem 0;font-size:2rem}
+    .cta{display:inline-block;margin:1rem 0;padding:0.75rem 1.25rem;
+         background:#ff694f;color:#fff;text-decoration:none;border-radius:6px}
+    .banner{position:fixed;bottom:0;left:0;right:0;
+            background:#f9f9f9;border-top:1px solid #ddd;padding:1rem;
+            display:none;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    .banner button{margin-left:1rem;padding:0.5rem 1rem;border:0;background:#0067ff;color:#fff;border-radius:4px;cursor:pointer}
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="img/logo.png" alt="Sugoi Shimeji logo" width="96">
+  <h1>Sugoi Shimeji</h1>
+  <p>Bring <strong>400 + animated character friends</strong> to any web-page! They sit,
+     jump, split, even <em>eat</em> each other&nbsp;– a playful nod to the classic
+     Shimeji desktop mascots <span aria-label="sparkle">✨</span></p>
+  <a class="cta"
+     href="https://chromewebstore.google.com/detail/sugoi-shimeji/jgckjhiolmelfpdofcbfnkkapeblcfdh"
+     target="_blank" rel="noopener">Install on Chrome</a>
+</header>
+
+<main>
+  <h2>Why you’ll love it</h2>
+  <ul>
+    <li>No character or spawn limit – create as many shimeji as you like.</li>
+    <li>Rare 1 % “secret” shimeji appear for lucky users.</li>
+    <li>Works on Chrome & Firefox; zero setup.</li>
+    <li>Open-source base inspired by the original Shimeji-EE project.</li>
+  </ul>
+
+  <h2>Privacy &amp; Ads</h2>
+  <p>
+    Sugoi Shimeji itself does <strong>not</strong> collect personal data. To keep the
+    project free we show <em>non-intrusive banner ads</em> delivered by
+    <a href="https://www.ad-maven.com/" target="_blank" rel="noopener">AdMaven</a>.
+    AdMaven may set cookies for frequency-capping and basic analytics.
+    See our <a href="privacy.html">Privacy Policy</a> for full details and opt-out
+    instructions.
+  </p>
+
+  <h2>Support</h2>
+  <p>
+    Questions or ideas? E-mail us at
+    <a href="mailto:austinthemichaud@gmail.com">austinthemichaud@gmail.com</a>.
+  </p>
+</main>
+
+<footer>
+  <small>&copy; 2025 Sugoi Shimeji&nbsp;·
+    <a href="privacy.html">Privacy Policy</a>
+  </small>
+</footer>
+
+<!-- EU-only cookie-consent stub -->
+<div id="cookieBanner" class="banner">
+  <span>This site uses cookies for ad-frequency caps. By continuing you
+        accept cookies.</span>
+  <div>
+    <button id="acceptBtn">Accept</button>
+    <button id="declineBtn">Decline</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const isEU = /^(AT|BE|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IE|IT|LV|LT|LU|MT|NL|PL|PT|RO|SK|SI|ES|SE|GB)$/i
+    .test(Intl.DateTimeFormat().resolvedOptions().timeZone.split('/').pop());
+  if(!isEU) return;           // show banner only for EU/UK visitors
+  const key='ss_cookie_ok';
+  const $banner=document.getElementById('cookieBanner');
+  if(localStorage.getItem(key)) return;
+  $banner.style.display='flex';
+  document.getElementById('acceptBtn').onclick = () =>
+    (localStorage.setItem(key,'y'), $banner.remove());
+  document.getElementById('declineBtn').onclick = () =>
+    (localStorage.setItem(key,'n'), $banner.remove());
+})();
+</script>
+
+</body>
+</html>
